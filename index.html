@@ -6,15 +6,19 @@
   <title>KH Mission Calendar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <div class="fx fx-a"></div>
+  <div class="fx fx-b"></div>
+  <div class="fx fx-c"></div>
   <div class="noise"></div>
   <div class="app-shell">
     <aside class="left-rail glass-panel">
       <section class="profile-card">
         <div class="profile-visual" id="profileVisual">
+          <div class="visual-grid"></div>
           <div class="visual-glow visual-glow-a"></div>
           <div class="visual-glow visual-glow-b"></div>
           <div class="character-silhouette"></div>
@@ -22,6 +26,7 @@
           <div class="visual-copy">
             <small>WEEKLY MISSION</small>
             <strong id="heroLine">일정 정리하고 하나씩 깨기</strong>
+            <span id="profileSubline">꾸미고 · 기록하고 · 챙기기</span>
           </div>
         </div>
         <div class="profile-info">
@@ -37,11 +42,36 @@
         <div class="info-chip pink">덕질 / 공연</div>
       </section>
 
+      <section class="mini-card dock-card">
+        <div class="dock-title">QUICK MOOD</div>
+        <div class="dock-row">
+          <button class="dock-btn" data-preset="sky" title="Sky">☁</button>
+          <button class="dock-btn" data-preset="midnight" title="Midnight">✦</button>
+          <button class="dock-btn" data-preset="rose" title="Rose">♡</button>
+          <button class="dock-btn" data-preset="mint" title="Mint">✿</button>
+        </div>
+      </section>
+
       <section class="mini-card status-card">
         <div class="status-dot"></div>
         <div>
           <small>CALENDAR STATUS</small>
           <strong>READY TO EDIT</strong>
+        </div>
+      </section>
+
+      <section class="mini-card focus-card">
+        <div class="card-head">
+          <div class="section-title">오늘의 포커스</div>
+          <div class="tiny-caption">LIVE</div>
+        </div>
+        <div class="focus-box">
+          <div class="focus-clock" id="liveClock">00:00</div>
+          <div class="focus-next">
+            <small>가장 가까운 일정</small>
+            <b id="nextFocusTitle">등록된 일정이 없어요.</b>
+            <span id="nextFocusMeta">일정을 추가하면 여기에 보여줘.</span>
+          </div>
         </div>
       </section>
 
@@ -64,15 +94,19 @@
 
     <main class="calendar-panel glass-panel">
       <section class="hero-strip">
-        <div>
+        <div class="hero-left">
           <div class="eyebrow large">PERSONAL MISSION BOARD</div>
           <h1 class="hero-title">일정도 깔끔하게, 화면도 까리하게.</h1>
           <p class="hero-desc">월별 일정 / 메모 / 카테고리 / 꾸미기 / 백업까지 한 번에 관리하는 개인 캘린더.</p>
+          <div class="hero-tags">
+            <span>취업</span><span>게임</span><span>약속</span><span>공연</span><span>시험</span>
+          </div>
         </div>
         <div class="hero-mini-stats">
           <div class="stat-pill"><span>이번 달 일정</span><b id="monthEventCount">0개</b></div>
           <div class="stat-pill"><span>남은 일정</span><b id="remainingEventCount">0개</b></div>
           <div class="stat-pill"><span>오늘 일정</span><b id="todayEventCount">0개</b></div>
+          <div class="stat-pill accent"><span>현재 테마</span><b id="currentThemeLabel">Sky Breeze</b></div>
         </div>
       </section>
 
@@ -119,10 +153,10 @@
           <div class="tiny-caption">1 CLICK</div>
         </div>
         <div class="preset-grid">
-          <button class="preset-btn" data-preset="sky">Sky</button>
-          <button class="preset-btn" data-preset="midnight">Midnight</button>
-          <button class="preset-btn" data-preset="rose">Rose</button>
-          <button class="preset-btn" data-preset="mint">Mint</button>
+          <button class="preset-btn" data-preset="sky">Sky Breeze</button>
+          <button class="preset-btn" data-preset="midnight">Midnight Neon</button>
+          <button class="preset-btn" data-preset="rose">Rose Dream</button>
+          <button class="preset-btn" data-preset="mint">Mint Aurora</button>
         </div>
       </section>
 
@@ -143,6 +177,7 @@
           <button id="applyThemeMedia" class="soft-btn">적용</button>
           <button id="resetThemeMedia" class="ghost-btn">초기화</button>
         </div>
+        <p class="help-text">명조 / 젠존제 / 좋아하는 애니 GIF 주소를 넣으면 바로 분위기가 바뀌어요.</p>
       </section>
 
       <section class="side-section data-card">
