@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KH Floating Widget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./widget.css" />
+</head>
+<body>
+  <div class="widget-shell">
+    <div class="widget-glow glow-a"></div>
+    <div class="widget-glow glow-b"></div>
+
+    <header class="widget-header">
+      <div>
+        <div class="label">FLOATING CALENDAR</div>
+        <h1>KH Mission Widget</h1>
+      </div>
+      <button id="openFullBtn" class="open-btn">전체 캘린더</button>
+    </header>
+
+    <section class="hero-card">
+      <div class="time-block">
+        <div id="clock" class="clock">00:00</div>
+        <div id="todayText" class="today-text">TODAY</div>
+      </div>
+      <div class="next-block">
+        <div class="mini-label">NEXT FOCUS</div>
+        <strong id="nextTitle">등록된 일정이 없어요.</strong>
+        <span id="nextMeta">일정을 추가하면 여기에 표시돼요.</span>
+      </div>
+    </section>
+
+    <section class="panel two-col">
+      <div class="card">
+        <div class="card-title">오늘 일정</div>
+        <div id="todayList" class="list"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">다가오는 일정</div>
+        <div id="upcomingList" class="list"></div>
+      </div>
+    </section>
+
+    <section class="panel calendar-card">
+      <div class="calendar-head">
+        <div>
+          <div class="mini-label">MINI MONTH</div>
+          <div id="monthTitle" class="month-title">MONTH</div>
+        </div>
+        <div class="legend">
+          <span><i class="dot today"></i> 오늘</span>
+          <span><i class="dot event"></i> 일정</span>
+        </div>
+      </div>
+      <div class="weekdays">
+        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+      </div>
+      <div id="miniCalendar" class="mini-calendar"></div>
+    </section>
+
+    <footer class="widget-footer">
+      <div id="statsText">오늘 0개 · 남은 일정 0개</div>
+      <a href="./index.html" target="_blank" rel="noopener">월간 보기 열기</a>
+    </footer>
+  </div>
+
+  <script src="./events-data.js"></script>
+  <script src="./widget.js"></script>
+</body>
+</html>
