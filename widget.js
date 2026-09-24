@@ -11,7 +11,7 @@
   const escapeHtml = (v='') => String(v).replace(/[&<>'"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[s]));
 
   const DEFAULT_SETTINGS = {
-    theme: 'sky',
+    theme: 'wuwa',
     opacity: 100,
     fontScale: 100,
     blur: 18,
@@ -19,11 +19,18 @@
     showToday: true,
     showUpcoming: true,
     showCalendar: true,
+    showMotion: true,
     refreshMinutes: 10,
     autoStart: true
   };
   let settings = {...DEFAULT_SETTINGS};
   try { settings = {...settings, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}')}; } catch {}
+  if (!settings.wuwaSkinApplied) {
+    settings.theme = 'wuwa';
+    settings.showMotion = true;
+    settings.wuwaSkinApplied = true;
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  }
 
   let stored = null;
   try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch {}
@@ -75,6 +82,7 @@
     $('#todayCard').classList.toggle('is-hidden', !settings.showToday);
     $('#upcomingCard').classList.toggle('is-hidden', !settings.showUpcoming);
     $('#calendarCard').classList.toggle('is-hidden', !settings.showCalendar);
+    $('#motionPanel').classList.toggle('is-hidden', !settings.showMotion);
 
     const schedulePanel = $('#schedulePanel');
     if (!settings.showToday && !settings.showUpcoming) schedulePanel.classList.add('is-hidden');
@@ -92,6 +100,7 @@
     $('#showTodayToggle').checked = settings.showToday;
     $('#showUpcomingToggle').checked = settings.showUpcoming;
     $('#showCalendarToggle').checked = settings.showCalendar;
+    $('#showMotionToggle').checked = settings.showMotion;
     $('#refreshSelect').value = String(settings.refreshMinutes);
     $('#autoStartToggle').checked = settings.autoStart;
 
@@ -214,6 +223,9 @@
   });
   $('#showCalendarToggle').addEventListener('change', e => {
     settings.showCalendar = e.target.checked; saveSettings(); applySettings();
+  });
+  $('#showMotionToggle').addEventListener('change', e => {
+    settings.showMotion = e.target.checked; saveSettings(); applySettings();
   });
   $('#refreshSelect').addEventListener('change', e => {
     settings.refreshMinutes = Number(e.target.value); saveSettings();
