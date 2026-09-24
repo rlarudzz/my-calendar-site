@@ -14,12 +14,13 @@
     <div class="widget-glow glow-a"></div>
     <div class="widget-glow glow-b"></div>
 
-    <header class="widget-header">
+    <header class="widget-header" id="dragHandle" title="빈 곳을 잡고 위젯 이동">
       <div>
         <div class="label">FLOATING CALENDAR</div>
         <h1>KH Mission Widget</h1>
       </div>
       <div class="header-actions">
+        <button id="hideBtn" class="icon-action" aria-label="위젯 숨기기" title="위젯 숨기기">—</button>
         <button id="settingsBtn" class="icon-action" aria-label="위젯 설정" title="위젯 설정">⚙</button>
         <button id="openFullBtn" class="open-btn">전체 캘린더</button>
       </div>
@@ -111,6 +112,11 @@
           <button class="size-btn" data-size="medium">기본</button>
           <button class="size-btn" data-size="large">크게</button>
         </div>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-title">Windows</div>
+        <label class="toggle-row"><span>로그인 시 자동 실행</span><input id="autoStartToggle" type="checkbox" checked><i></i></label>
       </div>
 
       <div class="setting-group">
