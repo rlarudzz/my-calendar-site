@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KH Mission Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="app-shell">
+    <aside class="left-rail glass-panel">
+      <section class="profile-card">
+        <div class="profile-visual" id="profileVisual">
+          <div class="visual-glow visual-glow-a"></div>
+          <div class="visual-glow visual-glow-b"></div>
+          <div class="character-silhouette"></div>
+          <div class="visual-badge">KH CALENDAR</div>
+          <div class="visual-copy">
+            <small>WEEKLY MISSION</small>
+            <strong id="heroLine">일정 정리하고 하나씩 깨기</strong>
+          </div>
+        </div>
+        <div class="profile-info">
+          <div><span>NAME.</span><b id="profileName">경훈</b></div>
+          <div><span>MODE.</span><b id="profileMode">FOCUS / PLAY / LIFE</b></div>
+          <div><span>TODAY.</span><b id="todayLabel">-</b></div>
+        </div>
+      </section>
+
+      <section class="mini-card chip-card">
+        <div class="info-chip cyan">취업 준비</div>
+        <div class="info-chip violet">게임 일정</div>
+        <div class="info-chip pink">덕질 / 공연</div>
+      </section>
+
+      <section class="mini-card status-card">
+        <div class="status-dot"></div>
+        <div>
+          <small>CALENDAR STATUS</small>
+          <strong>READY TO EDIT</strong>
+        </div>
+      </section>
+
+      <section class="mini-card countdown-card">
+        <div class="card-head">
+          <div class="section-title">다가오는 일정</div>
+          <div class="tiny-caption">NEXT 5</div>
+        </div>
+        <div id="upcomingList" class="upcoming-list"></div>
+      </section>
+
+      <section class="mini-card quick-note-card">
+        <div class="card-head">
+          <div class="section-title">빠른 메모</div>
+          <div class="tiny-caption">AUTO SAVE</div>
+        </div>
+        <textarea id="quickNote" placeholder="여기에 아무거나 메모해두면 자동 저장돼요."></textarea>
+      </section>
+    </aside>
+
+    <main class="calendar-panel glass-panel">
+      <section class="hero-strip">
+        <div>
+          <div class="eyebrow large">PERSONAL MISSION BOARD</div>
+          <h1 class="hero-title">일정도 깔끔하게, 화면도 까리하게.</h1>
+          <p class="hero-desc">월별 일정 / 메모 / 카테고리 / 꾸미기 / 백업까지 한 번에 관리하는 개인 캘린더.</p>
+        </div>
+        <div class="hero-mini-stats">
+          <div class="stat-pill"><span>이번 달 일정</span><b id="monthEventCount">0개</b></div>
+          <div class="stat-pill"><span>남은 일정</span><b id="remainingEventCount">0개</b></div>
+          <div class="stat-pill"><span>오늘 일정</span><b id="todayEventCount">0개</b></div>
+        </div>
+      </section>
+
+      <header class="calendar-header">
+        <button class="icon-btn" id="prevMonth" aria-label="이전 달">‹</button>
+        <div class="month-title-wrap">
+          <div class="eyebrow">PERSONAL CALENDAR</div>
+          <h2 id="monthTitle">2026년 9월</h2>
+        </div>
+        <button class="icon-btn" id="nextMonth" aria-label="다음 달">›</button>
+      </header>
+
+      <div class="calendar-actions">
+        <button id="todayBtn" class="soft-btn">오늘</button>
+        <button id="addEventBtn" class="primary-btn">+ 일정 추가</button>
+      </div>
+
+      <div class="weekday-row">
+        <div class="sun">SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div class="sat">SAT</div>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </main>
+
+    <aside class="right-rail glass-panel">
+      <section class="side-section">
+        <div class="card-head">
+          <div class="section-title">카테고리</div>
+          <div class="tiny-caption">LEGEND</div>
+        </div>
+        <div id="categoryList" class="category-list"></div>
+      </section>
+
+      <section class="side-section memo-lines">
+        <div class="card-head">
+          <div class="section-title">이번 달 노트</div>
+          <div class="tiny-caption">MONTH NOTE</div>
+        </div>
+        <textarea id="monthNote" placeholder="이달 목표 / 해야 할 일 / 메모"></textarea>
+      </section>
+
+      <section class="side-section theme-card">
+        <div class="card-head">
+          <div class="section-title">테마 프리셋</div>
+          <div class="tiny-caption">1 CLICK</div>
+        </div>
+        <div class="preset-grid">
+          <button class="preset-btn" data-preset="sky">Sky</button>
+          <button class="preset-btn" data-preset="midnight">Midnight</button>
+          <button class="preset-btn" data-preset="rose">Rose</button>
+          <button class="preset-btn" data-preset="mint">Mint</button>
+        </div>
+      </section>
+
+      <section class="side-section settings-card">
+        <div class="card-head">
+          <div class="section-title">꾸미기</div>
+          <div class="tiny-caption">MEDIA URL</div>
+        </div>
+        <label>
+          <span>프로필 이미지 / GIF URL</span>
+          <input id="profileMediaInput" type="url" placeholder="https://...gif" />
+        </label>
+        <label>
+          <span>배경 이미지 / GIF URL</span>
+          <input id="backgroundMediaInput" type="url" placeholder="https://...gif" />
+        </label>
+        <div class="setting-buttons">
+          <button id="applyThemeMedia" class="soft-btn">적용</button>
+          <button id="resetThemeMedia" class="ghost-btn">초기화</button>
+        </div>
+      </section>
+
+      <section class="side-section data-card">
+        <div class="card-head">
+          <div class="section-title">백업 / 불러오기</div>
+          <div class="tiny-caption">JSON</div>
+        </div>
+        <div class="data-actions">
+          <button id="exportBtn" class="soft-btn">일정 내보내기</button>
+          <label class="upload-btn">일정 불러오기<input id="importInput" type="file" accept="application/json" /></label>
+        </div>
+        <p class="help-text">나중에 일정표만 보내주면 이 데이터 구조로 내가 다시 반영해줄 수 있어.</p>
+      </section>
+    </aside>
+
+    <nav class="month-tabs" id="monthTabs"></nav>
+  </div>
+
+  <dialog id="eventDialog">
+    <form method="dialog" id="eventForm" class="event-form">
+      <div class="dialog-head">
+        <div>
+          <div class="eyebrow">SCHEDULE EDITOR</div>
+          <h2 id="dialogTitle">일정 추가</h2>
+        </div>
+        <button type="button" class="icon-btn small" id="closeDialog">×</button>
+      </div>
+      <input type="hidden" id="eventId" />
+      <label>날짜<input type="date" id="eventDate" required /></label>
+      <label>일정<input type="text" id="eventTitle" placeholder="예: 포스코 면접" required /></label>
+      <div class="two-col">
+        <label>시작 시간<input type="time" id="eventTime" /></label>
+        <label>카테고리<select id="eventCategory"></select></label>
+      </div>
+      <label>메모<textarea id="eventMemo" placeholder="장소, 준비물, 링크 등"></textarea></label>
+      <div class="dialog-actions">
+        <button type="button" id="deleteEventBtn" class="danger-btn hidden">삭제</button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost-btn" id="cancelDialog">취소</button>
+        <button type="submit" class="primary-btn">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="./events-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
