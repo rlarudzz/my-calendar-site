@@ -32,6 +32,17 @@ jobs:
           -p:PublishSingleFile=false
           -o .\release\app
 
+      - name: Verify Windows SDK runtime assembly
+        shell: pwsh
+        run: |
+          $sdk = Get-ChildItem .\release\app\Microsoft.Windows.SDK.NET.dll -ErrorAction SilentlyContinue
+          if (-not $sdk) {
+            Write-Error "Microsoft.Windows.SDK.NET.dll was not published."
+            exit 1
+          }
+          Write-Host "Found $($sdk.FullName)"
+          Write-Host "File version: $($sdk.VersionInfo.FileVersion)"
+
       - name: Copy installer files
         shell: pwsh
         run: |
