@@ -19,7 +19,8 @@
     showToday: true,
     showUpcoming: true,
     showCalendar: true,
-    refreshMinutes: 10
+    refreshMinutes: 10,
+    autoStart: true
   };
   let settings = {...DEFAULT_SETTINGS};
   try { settings = {...settings, ...JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}')}; } catch {}
@@ -45,8 +46,18 @@
     large: {w:560,h:880}
   };
 
+  function postHost(message) {
+    try { window.chrome?.webview?.postMessage(message); } catch {}
+  }
+
   function saveSettings() {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    postHost({
+      type:'widget-settings',
+      opacity: settings.opacity,
+      size: settings.size,
+      autoStart: settings.autoStart
+    });
   }
 
   function resizeWindowForPreset(name) {
@@ -82,6 +93,7 @@
     $('#showUpcomingToggle').checked = settings.showUpcoming;
     $('#showCalendarToggle').checked = settings.showCalendar;
     $('#refreshSelect').value = String(settings.refreshMinutes);
+    $('#autoStartToggle').checked = settings.autoStart;
 
     $$('.theme-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.theme === settings.theme));
     resizeWindowForPreset(settings.size);
@@ -163,6 +175,11 @@
   }
 
   $('#settingsBtn').addEventListener('click', openSettings);
+  $('#hideBtn').addEventListener('click', () => postHost({type:'hide'}));
+  $('#dragHandle').addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button,a,input,select,label')) return;
+    postHost({type:'drag'});
+  });
   $('#closeSettingsBtn').addEventListener('click', closeSettings);
   $('#settingsBackdrop').addEventListener('click', closeSettings);
   $('#openFullBtn').addEventListener('click', () => window.open('./index.html', '_blank'));
@@ -201,6 +218,9 @@
   $('#refreshSelect').addEventListener('change', e => {
     settings.refreshMinutes = Number(e.target.value); saveSettings();
   });
+  $('#autoStartToggle').addEventListener('change', e => {
+    settings.autoStart = e.target.checked; saveSettings();
+  });
 
   $('#resetSettingsBtn').addEventListener('click', () => {
     settings = {...DEFAULT_SETTINGS};
@@ -209,6 +229,7 @@
 
   render();
   applySettings();
+  postHost({type:'ready', opacity:settings.opacity, size:settings.size, autoStart:settings.autoStart});
   scheduleClock();
 
   if (settings.refreshMinutes > 0) {
