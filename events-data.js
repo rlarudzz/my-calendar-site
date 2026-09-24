@@ -18,7 +18,7 @@ window.DEFAULT_CALENDAR_DATA = {
       title: '포스코 지원서 접수 시작',
       time: '',
       category: 'job',
-      memo: '포스코 채용 지원서 접수 기간: 9/1(화) ~ 9/16(수)'
+      memo: ''
     },
     {
       id: 'posco_2026_apply_deadline',
@@ -26,7 +26,7 @@ window.DEFAULT_CALENDAR_DATA = {
       title: '포스코 지원서 접수 마감',
       time: '',
       category: 'important',
-      memo: '포스코 채용 지원서 접수 마감일'
+      memo: ''
     },
     {
       id: 'posco_2026_pat',
@@ -34,7 +34,225 @@ window.DEFAULT_CALENDAR_DATA = {
       title: '포스코 인적성 검사 (PAT)',
       time: '',
       category: 'exam',
-      memo: '온라인 진행. 이후 전형: 1차 면접(직무역량평가) → 2차 면접(가치적합성평가) → 최종 합격자 발표. 이후 일정은 이미지에 날짜 미표기.'
+      memo: ''
+    },
+
+    {
+      id: 'kospo_2026_notice_start',
+      date: '2026-09-11',
+      title: '남부발전 채용공고 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_apply_start',
+      date: '2026-09-18',
+      title: '남부발전 지원서 접수 시작',
+      time: '10:00',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_notice_apply_deadline',
+      date: '2026-09-28',
+      title: '남부발전 채용공고·지원서 접수 마감',
+      time: '12:00',
+      category: 'important',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_written_target',
+      date: '2026-10-07',
+      title: '남부발전 필기 대상자 발표',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_written',
+      date: '2026-10-18',
+      title: '남부발전 필기전형',
+      time: '',
+      category: 'exam',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_interview_target',
+      date: '2026-10-23',
+      title: '남부발전 면접 대상자 발표',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_essay_start',
+      date: '2026-10-23',
+      title: '남부발전 자기소개서 제출 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_essay_deadline',
+      date: '2026-10-26',
+      title: '남부발전 자기소개서 제출 마감',
+      time: '15:00',
+      category: 'important',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_interview_start',
+      date: '2026-11-02',
+      title: '남부발전 면접전형 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_interview_end',
+      date: '2026-11-04',
+      title: '남부발전 면접전형 종료',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_final',
+      date: '2026-12-11',
+      title: '남부발전 최종합격자 발표',
+      time: '',
+      category: 'important',
+      memo: ''
+    },
+    {
+      id: 'kospo_2026_join',
+      date: '2026-12-21',
+      title: '남부발전 입사',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+
+    {
+      id: 'ewp_2026_apply_start',
+      date: '2026-09-02',
+      title: '동서발전 지원서 접수 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_apply_deadline',
+      date: '2026-09-09',
+      title: '동서발전 지원서 접수 마감',
+      time: '',
+      category: 'important',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_document_result',
+      date: '2026-09-14',
+      title: '동서발전 서류합격자 발표',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_written',
+      date: '2026-09-19',
+      title: '동서발전 필기전형',
+      time: '',
+      category: 'exam',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_written_result',
+      date: '2026-09-28',
+      title: '동서발전 필기합격자 발표',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_essay_start',
+      date: '2026-09-28',
+      title: '동서발전 자기소개서 제출 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_essay_deadline',
+      date: '2026-09-29',
+      title: '동서발전 자기소개서 제출 마감',
+      time: '',
+      category: 'important',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_interview_target',
+      date: '2026-10-07',
+      title: '동서발전 면접대상자 발표',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_interview_start',
+      date: '2026-10-19',
+      title: '동서발전 면접전형 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_interview_end',
+      date: '2026-10-23',
+      title: '동서발전 면접전형 종료',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_interview_result',
+      date: '2026-11-03',
+      title: '동서발전 면접 합격자 발표',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_medical_start',
+      date: '2026-11-03',
+      title: '동서발전 신체검사·신원조회 시작',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_medical_end',
+      date: '2026-11-17',
+      title: '동서발전 신체검사·신원조회 종료',
+      time: '',
+      category: 'job',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_final',
+      date: '2026-11-24',
+      title: '동서발전 최종합격자 발표',
+      time: '',
+      category: 'important',
+      memo: ''
+    },
+    {
+      id: 'ewp_2026_join',
+      date: '2026-11-30',
+      title: '동서발전 입사',
+      time: '',
+      category: 'job',
+      memo: ''
     }
   ]
 };
