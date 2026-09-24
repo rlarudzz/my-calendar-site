@@ -209,6 +209,26 @@
     <nav class="month-tabs" id="monthTabs"></nav>
   </div>
 
+  <dialog id="dayAgendaDialog" class="day-agenda-dialog">
+    <div class="day-agenda">
+      <div class="dialog-head">
+        <div>
+          <div class="eyebrow">DAY SCHEDULE</div>
+          <h2 id="dayAgendaTitle">오늘 일정</h2>
+          <p id="dayAgendaCount" class="day-agenda-count">0개의 일정</p>
+        </div>
+        <button type="button" class="icon-btn small" id="closeDayAgenda">×</button>
+      </div>
+
+      <div id="dayAgendaList" class="day-agenda-list"></div>
+
+      <div class="day-agenda-actions">
+        <button type="button" id="dayAgendaAddBtn" class="primary-btn">+ 이 날짜에 일정 추가</button>
+        <button type="button" id="dayAgendaCloseBtn" class="ghost-btn">닫기</button>
+      </div>
+    </div>
+  </dialog>
+
   <dialog id="eventDialog">
     <form method="dialog" id="eventForm" class="event-form">
       <div class="dialog-head">
