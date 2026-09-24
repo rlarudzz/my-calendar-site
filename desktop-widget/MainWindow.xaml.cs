@@ -114,8 +114,10 @@ public partial class MainWindow : Window
                                    calendarOnlyNode.ValueKind is JsonValueKind.True or JsonValueKind.False &&
                                    calendarOnlyNode.GetBoolean();
 
-                var hasWidth = root.TryGetProperty("width", out var widthNode) && widthNode.TryGetDouble(out var requestedWidth);
-                var hasHeight = root.TryGetProperty("height", out var heightNode) && heightNode.TryGetDouble(out var requestedHeight);
+                double requestedWidth = Width;
+                double requestedHeight = Height;
+                var hasWidth = root.TryGetProperty("width", out var widthNode) && widthNode.TryGetDouble(out requestedWidth);
+                var hasHeight = root.TryGetProperty("height", out var heightNode) && heightNode.TryGetDouble(out requestedHeight);
 
                 if (hasWidth || hasHeight)
                 {
