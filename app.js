@@ -65,6 +65,8 @@
   const categoryList = $('#categoryList');
   const upcomingList = $('#upcomingList');
   const dialog = $('#eventDialog');
+  const dayAgendaDialog = $('#dayAgendaDialog');
+  const dayAgendaList = $('#dayAgendaList');
   const form = $('#eventForm');
 
   const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -119,14 +121,16 @@
       const dayEvents = data.events.filter(e => e.date === ymd).sort((a,b) => (a.time||'99:99').localeCompare(b.time||'99:99'));
       const visible = dayEvents.slice(0,4);
       cell.innerHTML = `<div class="day-number">${d.getDate()}</div><div class="events-wrap">${visible.map(eventChip).join('')}${dayEvents.length>4?`<div class="more-chip">+${dayEvents.length-4}개 더보기</div>`:''}</div>`;
-      cell.addEventListener('click', (e) => {
+      cell.addEventListener('click', () => {
         selectedDate = ymd;
-        if (e.target.closest('.event-chip')) return;
-        openAddDialog(ymd);
+        renderCalendar();
+        openDayAgenda(ymd);
       });
       cell.querySelectorAll('.event-chip').forEach(ch => ch.addEventListener('click', (e) => {
         e.stopPropagation();
-        openEditDialog(ch.dataset.id);
+        selectedDate = ymd;
+        renderCalendar();
+        openDayAgenda(ymd);
       }));
       grid.appendChild(cell);
     }
@@ -194,6 +198,56 @@
     renderStats();
   }
 
+  function formatAgendaDate(dateStr) {
+    const d = parseYMD(dateStr);
+    const days = ['일','월','화','수','목','금','토'];
+    return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${days[d.getDay()]})`;
+  }
+
+  function renderDayAgenda(date = selectedDate) {
+    const items = data.events
+      .filter(e => e.date === date)
+      .sort((a,b) => (a.time||'99:99').localeCompare(b.time||'99:99') || a.title.localeCompare(b.title));
+
+    $('#dayAgendaTitle').textContent = formatAgendaDate(date);
+    $('#dayAgendaCount').textContent = `${items.length}개의 일정`;
+
+    dayAgendaList.innerHTML = items.length ? items.map(e => {
+      const c = categoryById(e.category);
+      return `
+        <button type="button" class="day-agenda-item" data-id="${escapeHtml(e.id)}" style="--agenda-color:${c.color};--agenda-bg:${c.bg}">
+          <div class="day-agenda-time">${e.time || '종일'}</div>
+          <div class="day-agenda-main">
+            <b>${escapeHtml(e.title)}</b>
+            <span>${escapeHtml(c.name)}${e.memo ? ' · ' + escapeHtml(e.memo) : ''}</span>
+          </div>
+          <span class="day-agenda-edit">수정 ›</span>
+        </button>`;
+    }).join('') : `
+      <div class="day-agenda-empty">
+        <div class="day-agenda-empty-icon">○</div>
+        <b>등록된 일정이 없어요.</b>
+        <span>아래 버튼으로 이 날짜에 일정을 추가할 수 있어요.</span>
+      </div>`;
+
+    dayAgendaList.querySelectorAll('.day-agenda-item').forEach(item => {
+      item.addEventListener('click', () => {
+        dayAgendaDialog.close();
+        openEditDialog(item.dataset.id);
+      });
+    });
+  }
+
+  function openDayAgenda(date = selectedDate) {
+    selectedDate = date;
+    renderDayAgenda(date);
+    dayAgendaDialog.showModal();
+  }
+
+  function closeDayAgenda() {
+    if (dayAgendaDialog.open) dayAgendaDialog.close();
+  }
+
   function openAddDialog(date = selectedDate) {
     $('#dialogTitle').textContent = '일정 추가';
     $('#eventId').value = '';
@@ -255,6 +309,15 @@
 
   $('#closeDialog').addEventListener('click', closeDialog);
   $('#cancelDialog').addEventListener('click', closeDialog);
+
+  $('#closeDayAgenda').addEventListener('click', closeDayAgenda);
+  $('#dayAgendaCloseBtn').addEventListener('click', closeDayAgenda);
+  $('#dayAgendaAddBtn').addEventListener('click', () => {
+    const date = selectedDate;
+    closeDayAgenda();
+    openAddDialog(date);
+  });
+
   $('#addEventBtn').addEventListener('click', () => openAddDialog(selectedDate));
   $('#prevMonth').addEventListener('click', () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth()-1, 1); renderAll(); });
   $('#nextMonth').addEventListener('click', () => { viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth()+1, 1); renderAll(); });
