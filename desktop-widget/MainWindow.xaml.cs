@@ -123,10 +123,7 @@ public partial class MainWindow : Window
             }
             else if (type == "drag")
             {
-                Dispatcher.BeginInvoke(() =>
-                {
-                    try { DragMove(); } catch { }
-                });
+                BeginNativeDrag();
             }
         }
         catch { }
@@ -136,9 +133,9 @@ public partial class MainWindow : Window
     {
         var target = size switch
         {
-            "small" => (390d, 620d),
-            "large" => (560d, 880d),
-            _ => (470d, 760d)
+            "small" => (360d, 560d),
+            "large" => (520d, 800d),
+            _ => (440d, 680d)
         };
 
         if (Math.Abs(Width - target.Item1) > 2 || Math.Abs(Height - target.Item2) > 2)
@@ -311,6 +308,17 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    private void BeginNativeDrag()
+    {
+        try
+        {
+            var hwnd = new WindowInteropHelper(this).Handle;
+            ReleaseCapture();
+            SendMessage(hwnd, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);
+        }
+        catch { }
+    }
+
     private void ApplyRoundedCorners()
     {
         try
@@ -321,6 +329,16 @@ public partial class MainWindow : Window
         }
         catch { }
     }
+
+    private const int WM_NCLBUTTONDOWN = 0x00A1;
+    private const int HTCAPTION = 2;
+
+    [DllImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool ReleaseCapture();
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(
@@ -333,8 +351,8 @@ public partial class MainWindow : Window
     {
         public double Left { get; set; }
         public double Top { get; set; }
-        public double Width { get; set; } = 470;
-        public double Height { get; set; } = 760;
+        public double Width { get; set; } = 440;
+        public double Height { get; set; } = 680;
         public double Opacity { get; set; } = 1;
     }
 }
