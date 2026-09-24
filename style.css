@@ -189,3 +189,40 @@ dialog{border:0;border-radius:22px;padding:0;background:transparent;max-width:52
 .preset-btn[data-preset="wuwa"]{background:linear-gradient(135deg,#d9f4f2,#dceaf2);color:#2c5960}
 .dock-btn[data-preset="wuwa"]{background:linear-gradient(135deg,#dff7f4,#dfeaf3);color:#32646b}
 .fx,.visual-glow{animation:none!important}
+
+
+/* DAY AGENDA */
+.day-agenda-dialog{
+  width:min(560px,calc(100vw - 28px));
+  max-height:min(720px,calc(100vh - 28px));
+  border:0;border-radius:26px;padding:0;
+  background:rgba(247,251,255,.97);
+  box-shadow:0 28px 90px rgba(35,60,104,.28);
+  overflow:hidden
+}
+.day-agenda-dialog::backdrop{background:rgba(28,45,73,.28);backdrop-filter:blur(4px)}
+.day-agenda{padding:20px;max-height:min(720px,calc(100vh - 28px));display:flex;flex-direction:column}
+.day-agenda-count{margin:5px 0 0;color:var(--muted);font-size:12px}
+.day-agenda-list{display:flex;flex-direction:column;gap:9px;overflow:auto;padding:2px 3px 6px;margin:4px -3px 12px}
+.day-agenda-item{
+  width:100%;display:grid;grid-template-columns:68px 1fr auto;gap:12px;align-items:center;
+  border:1px solid rgba(89,118,161,.10);border-left:5px solid var(--agenda-color);
+  border-radius:16px;padding:12px;background:var(--agenda-bg);text-align:left;cursor:pointer;
+  box-shadow:0 8px 20px rgba(72,96,137,.06);transition:.15s ease
+}
+.day-agenda-item:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(72,96,137,.12)}
+.day-agenda-time{font-family:Orbitron,Pretendard,sans-serif;font-size:12px;font-weight:800;color:#45678f}
+.day-agenda-main{min-width:0}
+.day-agenda-main b{display:block;font-size:14px;color:#28486f;line-height:1.35}
+.day-agenda-main span{display:block;margin-top:4px;font-size:11px;color:#7387a2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.day-agenda-edit{font-size:11px;font-weight:800;color:#748aaa;white-space:nowrap}
+.day-agenda-empty{padding:34px 12px;text-align:center;color:#8295ae;background:#f4f8fd;border-radius:18px}
+.day-agenda-empty-icon{font-size:28px;margin-bottom:8px;color:#a8bbd1}
+.day-agenda-empty b{display:block;font-size:14px;color:#5b7393}
+.day-agenda-empty span{display:block;margin-top:6px;font-size:11px;line-height:1.5}
+.day-agenda-actions{display:flex;justify-content:flex-end;gap:8px}
+@media(max-width:560px){
+  .day-agenda{padding:15px}
+  .day-agenda-item{grid-template-columns:54px 1fr;padding:10px}
+  .day-agenda-edit{display:none}
+}
