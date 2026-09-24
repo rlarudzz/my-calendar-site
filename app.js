@@ -6,6 +6,7 @@
   const fallback = window.DEFAULT_CALENDAR_DATA || { version: 1, categories: [], events: [] };
 
   const $ = (sel) => document.querySelector(sel);
+  const $ = (sel) => Array.from(document.querySelectorAll(sel));
   const pad = (n) => String(n).padStart(2, '0');
   const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const parseYMD = (s) => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
@@ -130,6 +131,27 @@
     }).join('') : `<div class="empty-note">아직 등록된 일정이 없어요.</div>`;
   }
 
+  function upcomingEvents() {
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    return data.events
+      .map(e => ({...e, _d: parseYMD(e.date)}))
+      .filter(e => e._d >= now)
+      .sort((a,b) => a._d - b._d || (a.time||'').localeCompare(b.time||''));
+  }
+
+  function renderFocus() {
+    const first = upcomingEvents()[0];
+    if (!first) {
+      $('#nextFocusTitle').textContent = '등록된 일정이 없어요.';
+      $('#nextFocusMeta').textContent = '일정을 추가하면 여기에 보여줘.';
+      return;
+    }
+    const c = categoryById(first.category);
+    $('#nextFocusTitle').textContent = first.title;
+    $('#nextFocusMeta').textContent = `${first.date}${first.time ? ' · ' + first.time : ''} · ${c.name}`;
+  }
+
   function renderNotes() {
     const key = `${viewDate.getFullYear()}-${pad(viewDate.getMonth()+1)}`;
     $('#monthNote').value = notes[key] || '';
@@ -151,6 +173,7 @@
     renderCalendar();
     renderTabs();
     renderUpcoming();
+    renderFocus();
     renderNotes();
     renderStats();
   }
@@ -229,10 +252,37 @@
     saveNotes();
   });
 
+  const PRESET_META = {
+    sky: {label:'Sky Breeze', heroLine:'일정 정리하고 하나씩 깨기', subline:'꾸미고 · 기록하고 · 챙기기'},
+    midnight: {label:'Midnight Neon', heroLine:'야간 감성으로 일정 몰입하기', subline:'네온 · 게임 · 집중 모드'},
+    rose: {label:'Rose Dream', heroLine:'부드럽게 정리하는 로즈 무드', subline:'핑크 · 퍼플 · 몽환 감성'},
+    mint: {label:'Mint Aurora', heroLine:'산뜻하게 챙기는 민트 오로라', subline:'맑음 · 정리 · 리프레시'}
+  };
+
+  function setPresetActive(name) {
+    $('.preset-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
+    $('.dock-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
+  }
+
+  function applyPreset(name) {
+    const presetName = PRESETS[name] ? name : 'sky';
+    const p = PRESETS[presetName];
+    const meta = PRESET_META[presetName];
+    theme.preset = presetName;
+    theme.baseGradient = p.bg;
+    theme.heroGradient = p.hero;
+    document.body.style.background = p.bg;
+    document.documentElement.style.setProperty('--hero-grad', p.hero);
+    $('#heroLine').textContent = meta.heroLine;
+    $('#profileSubline').textContent = meta.subline;
+    $('#currentThemeLabel').textContent = meta.label;
+    setPresetActive(presetName);
+  }
+
   function applyTheme() {
-    document.body.style.background = theme.baseGradient || PRESETS.sky.bg;
+    const presetName = theme.preset && PRESETS[theme.preset] ? theme.preset : 'sky';
+    applyPreset(presetName);
     document.body.style.setProperty('--custom-bg', theme.background ? `url("${theme.background}")` : 'none');
-    document.documentElement.style.setProperty('--hero-grad', theme.heroGradient || PRESETS.sky.hero);
     $('#profileVisual').style.setProperty('--profile-media', theme.profile ? `url("${theme.profile}")` : 'none');
     $('#profileMediaInput').value = theme.profile || '';
     $('#backgroundMediaInput').value = theme.background || '';
@@ -252,13 +302,9 @@
     applyTheme();
   });
 
-  document.querySelectorAll('.preset-btn').forEach(btn => btn.addEventListener('click', () => {
-    const p = PRESETS[btn.dataset.preset];
-    if (!p) return;
-    theme.baseGradient = p.bg;
-    theme.heroGradient = p.hero;
+  $('.preset-btn, .dock-btn').forEach(btn => btn.addEventListener('click', () => {
+    applyPreset(btn.dataset.preset);
     saveTheme();
-    applyTheme();
   }));
 
   $('#exportBtn').addEventListener('click', () => {
@@ -300,6 +346,13 @@
     reader.readAsText(file);
     ev.target.value = '';
   });
+
+  function tickClock() {
+    const now = new Date();
+    $('#liveClock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  }
+  setInterval(tickClock, 1000);
+  tickClock();
 
   $('#todayLabel').textContent = `${today.getMonth()+1}.${today.getDate()}`;
   renderCategories();
