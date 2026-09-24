@@ -14,6 +14,11 @@
   --accent-c:#ee88d0;
   --shadow:0 18px 45px rgba(67,87,141,.18);
 }
+:root[data-theme="wuwa"]{
+  --shell-1:225 244 243; --shell-2:226 236 240; --shell-3:229 234 242;
+  --text:#274951; --muted:#6f8d93; --accent-a:#52c7c1; --accent-b:#6c9eae; --accent-c:#8b91c7;
+  --panel-alpha:.72; --panel2-alpha:.82; --shadow:0 20px 48px rgba(52,83,91,.16);
+}
 :root[data-theme="midnight"]{
   --shell-1:32 41 70; --shell-2:39 40 77; --shell-3:63 39 84;
   --text:#eef4ff; --muted:#b7c3dc; --accent-a:#73a5ff; --accent-b:#9d79ff; --accent-c:#ff89cf;
@@ -117,3 +122,23 @@ button,input,select{font:inherit}
 /* Native WebView2 host integration */
 .widget-header{cursor:move}
 .widget-header button{cursor:pointer}
+
+
+/* WUWA LOW-MOTION ART */
+.widget-shell::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(180deg,rgba(228,247,247,.76),rgba(231,239,244,.93)),url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3513350/c85fc0782fba9d3c8c8b4989587c720c325ed9cf/header.jpg");
+  background-size:cover;background-position:center;opacity:.30;
+}
+.widget-header,.hero-card,.panel,.widget-footer,.wuwa-motion-panel{z-index:1}
+.wuwa-motion-panel{
+  position:relative;z-index:1;height:92px;margin-bottom:12px;border-radius:20px;overflow:hidden;
+  background:#102028;border:1px solid rgba(255,255,255,.58);box-shadow:0 10px 24px rgba(41,69,78,.12)
+}
+.wuwa-motion-panel img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) contrast(1.04)}
+.wuwa-motion-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,19,25,.08),rgba(8,19,25,.62))}
+.wuwa-motion-panel>div{position:absolute;z-index:2;right:12px;bottom:11px;text-align:right;color:#efffff}
+.wuwa-motion-panel b{display:block;font-size:.72rem;letter-spacing:.12em}
+.wuwa-motion-panel span{display:block;font-size:.56rem;opacity:.72;letter-spacing:.14em;margin-top:3px}
+.theme-btn[data-theme="wuwa"]{background:linear-gradient(135deg,#dcf6f3,#dfeaf1);color:#35646a}
+.widget-glow{display:none}
