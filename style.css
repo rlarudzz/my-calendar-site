@@ -121,3 +121,39 @@ dialog{border:0;border-radius:22px;padding:0;background:transparent;max-width:52
   .weekday-row div{padding:10px 4px;font-size:10px}
   .two-col{grid-template-columns:1fr}
 }
+
+
+/* KH GAME-ANIME ENHANCEMENT */
+.fx{position:fixed;border-radius:50%;filter:blur(45px);opacity:.44;pointer-events:none;z-index:0;animation:floatFx 13s ease-in-out infinite}
+.fx-a{width:240px;height:240px;left:-40px;top:40px;background:#8fd7ff}
+.fx-b{width:220px;height:220px;right:4%;top:8%;background:#e7a5ff;animation-delay:-5s}
+.fx-c{width:300px;height:300px;left:18%;bottom:-80px;background:#a4f5de;animation-delay:-8s}
+@keyframes floatFx{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(16px) translateX(12px)}}
+.profile-visual{height:325px}
+.visual-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0));pointer-events:none;z-index:1}
+.visual-glow{animation:pulseGlow 7s ease-in-out infinite}
+.visual-glow-b{animation-delay:-2.5s}
+@keyframes pulseGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.visual-copy span{display:block;margin-top:6px;font-size:11px;opacity:.86}
+.dock-card{padding:12px 14px}
+.dock-title{font-size:11px;font-weight:800;letter-spacing:.12em;color:#7186a5;margin-bottom:9px}
+.dock-row{display:flex;gap:10px}
+.dock-btn{width:46px;height:46px;border-radius:50%;border:0;background:linear-gradient(135deg,#ffffff,#eaf4ff);font-size:20px;box-shadow:0 10px 18px rgba(76,103,161,.12);cursor:pointer;transition:.2s}
+.dock-btn:hover{transform:translateY(-2px)}
+.dock-btn.active{outline:2px solid rgba(125,110,244,.42);transform:translateY(-1px)}
+.focus-box{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:center}
+.focus-clock{font-family:Orbitron,sans-serif;font-size:22px;font-weight:800;color:#274f89;background:linear-gradient(135deg,#eff5ff,#e8edff);border-radius:16px;padding:16px 8px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.focus-next small{display:block;font-size:10px;color:#88a0be;margin-bottom:5px}
+.focus-next b{display:block;font-size:13px;line-height:1.4;color:#274873}
+.focus-next span{display:block;margin-top:5px;font-size:11px;color:#7087a4;line-height:1.45}
+.hero-strip{border-radius:24px;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 14px 30px rgba(83,104,171,.12)}
+.hero-strip::after{content:"";position:absolute;right:-40px;top:-36px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,#ffffff9c 0,rgba(255,255,255,0) 70%)}
+.hero-left,.hero-mini-stats{position:relative;z-index:1}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.hero-tags span{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.64);font-size:11px;font-weight:800;color:#486691}
+.hero-mini-stats{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:10px}
+.stat-pill.accent{background:linear-gradient(135deg,rgba(255,255,255,.8),rgba(238,242,255,.72))}
+.preset-grid{grid-template-columns:1fr}
+.preset-btn{text-align:left;padding:12px;border:1px solid transparent}
+.preset-btn.active{background:linear-gradient(135deg,#edf5ff,#efe9ff);border-color:#bfd7ff;box-shadow:0 8px 18px rgba(83,109,166,.08)}
+@media (max-width:700px){.focus-box{grid-template-columns:1fr}.hero-mini-stats{grid-template-columns:1fr 1fr}}
