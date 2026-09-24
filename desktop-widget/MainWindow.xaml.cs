@@ -114,8 +114,19 @@ public partial class MainWindow : Window
                                    calendarOnlyNode.ValueKind is JsonValueKind.True or JsonValueKind.False &&
                                    calendarOnlyNode.GetBoolean();
 
-                if (root.TryGetProperty("size", out var sizeNode))
+                var hasWidth = root.TryGetProperty("width", out var widthNode) && widthNode.TryGetDouble(out var requestedWidth);
+                var hasHeight = root.TryGetProperty("height", out var heightNode) && heightNode.TryGetDouble(out var requestedHeight);
+
+                if (hasWidth || hasHeight)
+                {
+                    ApplyCustomSize(
+                        hasWidth ? requestedWidth : Width,
+                        hasHeight ? requestedHeight : Height);
+                }
+                else if (root.TryGetProperty("size", out var sizeNode))
+                {
                     ApplySizePreset(sizeNode.GetString(), calendarOnly);
+                }
 
                 if (root.TryGetProperty("autoStart", out var autoNode) &&
                     (autoNode.ValueKind is JsonValueKind.True or JsonValueKind.False))
@@ -132,8 +143,22 @@ public partial class MainWindow : Window
             {
                 BeginNativeDrag();
             }
+            else if (type == "resize-start")
+            {
+                BeginNativeResize();
+            }
         }
         catch { }
+    }
+
+    private void ApplyCustomSize(double width, double height)
+    {
+        var targetWidth = Math.Clamp(width, MinWidth, MaxWidth);
+        var targetHeight = Math.Clamp(height, MinHeight, MaxHeight);
+
+        if (Math.Abs(Width - targetWidth) > 2) Width = targetWidth;
+        if (Math.Abs(Height - targetHeight) > 2) Height = targetHeight;
+        KeepInsideWorkArea();
     }
 
     private void ApplySizePreset(string? size, bool calendarOnly = false)
@@ -342,6 +367,17 @@ public partial class MainWindow : Window
         catch { }
     }
 
+    private void BeginNativeResize()
+    {
+        try
+        {
+            var hwnd = new WindowInteropHelper(this).Handle;
+            ReleaseCapture();
+            SendMessage(hwnd, WM_NCLBUTTONDOWN, (IntPtr)HTBOTTOMRIGHT, IntPtr.Zero);
+        }
+        catch { }
+    }
+
     private void ApplyRoundedCorners()
     {
         try
@@ -355,6 +391,7 @@ public partial class MainWindow : Window
 
     private const int WM_NCLBUTTONDOWN = 0x00A1;
     private const int HTCAPTION = 2;
+    private const int HTBOTTOMRIGHT = 17;
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
