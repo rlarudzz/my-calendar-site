@@ -197,9 +197,18 @@ public partial class MainWindow : Window
 
     private void ShowWidget()
     {
+        ShowFromExternalLaunch();
+    }
+
+    public void ShowFromExternalLaunch()
+    {
         Show();
         WindowState = WindowState.Normal;
+        KeepInsideWorkArea();
         Activate();
+        Topmost = true;
+        Topmost = false;
+        Focus();
     }
 
     protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
