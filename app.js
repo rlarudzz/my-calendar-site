@@ -260,8 +260,8 @@
   };
 
   function setPresetActive(name) {
-    $('.preset-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
-    $('.dock-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
+    $$('.preset-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
+    $$('.dock-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.preset === name));
   }
 
   function applyPreset(name) {
@@ -302,7 +302,7 @@
     applyTheme();
   });
 
-  $('.preset-btn, .dock-btn').forEach(btn => btn.addEventListener('click', () => {
+  $$('.preset-btn, .dock-btn').forEach(btn => btn.addEventListener('click', () => {
     applyPreset(btn.dataset.preset);
     saveTheme();
   }));
