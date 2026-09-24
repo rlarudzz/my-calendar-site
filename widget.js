@@ -19,6 +19,7 @@
     showToday: true,
     showUpcoming: true,
     showCalendar: true,
+    calendarOnly: false,
     showMotion: true,
     refreshMinutes: 10,
     autoStart: true
@@ -63,7 +64,8 @@
       type:'widget-settings',
       opacity: settings.opacity,
       size: settings.size,
-      autoStart: settings.autoStart
+      autoStart: settings.autoStart,
+      calendarOnly: settings.calendarOnly
     });
   }
 
@@ -75,7 +77,7 @@
 
   function applySettings() {
     document.documentElement.dataset.theme = settings.theme;
-    document.documentElement.style.setProperty('--shell-alpha', Math.max(.55, settings.opacity / 100));
+    document.documentElement.style.setProperty('--shell-alpha', Math.max(.20, settings.opacity / 100));
     document.documentElement.style.setProperty('--font-scale', settings.fontScale / 100);
     document.documentElement.style.setProperty('--blur', `${settings.blur}px`);
 
@@ -83,6 +85,7 @@
     $('#upcomingCard').classList.toggle('is-hidden', !settings.showUpcoming);
     $('#calendarCard').classList.toggle('is-hidden', !settings.showCalendar);
     $('#motionPanel').classList.toggle('is-hidden', !settings.showMotion);
+    $('#widgetShell').classList.toggle('calendar-only', settings.calendarOnly);
 
     const schedulePanel = $('#schedulePanel');
     if (!settings.showToday && !settings.showUpcoming) schedulePanel.classList.add('is-hidden');
@@ -100,6 +103,7 @@
     $('#showTodayToggle').checked = settings.showToday;
     $('#showUpcomingToggle').checked = settings.showUpcoming;
     $('#showCalendarToggle').checked = settings.showCalendar;
+    $('#calendarOnlyToggle').checked = settings.calendarOnly;
     $('#showMotionToggle').checked = settings.showMotion;
     $('#refreshSelect').value = String(settings.refreshMinutes);
     $('#autoStartToggle').checked = settings.autoStart;
@@ -189,6 +193,11 @@
     if (e.target.closest('button,a,input,select,label')) return;
     postHost({type:'drag'});
   });
+  $('#calendarCard').addEventListener('pointerdown', (e) => {
+    if (!settings.calendarOnly) return;
+    if (e.target.closest('button,a,input,select,label')) return;
+    postHost({type:'drag'});
+  });
   $('#closeSettingsBtn').addEventListener('click', closeSettings);
   $('#settingsBackdrop').addEventListener('click', closeSettings);
   $('#openFullBtn').addEventListener('click', () => window.open('./index.html', '_blank'));
@@ -224,6 +233,11 @@
   $('#showCalendarToggle').addEventListener('change', e => {
     settings.showCalendar = e.target.checked; saveSettings(); applySettings();
   });
+  $('#calendarOnlyToggle').addEventListener('change', e => {
+    settings.calendarOnly = e.target.checked;
+    if (settings.calendarOnly) settings.showCalendar = true;
+    saveSettings(); applySettings();
+  });
   $('#showMotionToggle').addEventListener('change', e => {
     settings.showMotion = e.target.checked; saveSettings(); applySettings();
   });
@@ -241,7 +255,7 @@
 
   render();
   applySettings();
-  postHost({type:'ready', opacity:settings.opacity, size:settings.size, autoStart:settings.autoStart});
+  postHost({type:'ready', opacity:settings.opacity, size:settings.size, autoStart:settings.autoStart, calendarOnly:settings.calendarOnly});
   scheduleClock();
 
   if (settings.refreshMinutes > 0) {
