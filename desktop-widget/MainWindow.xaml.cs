@@ -59,8 +59,6 @@ public partial class MainWindow : Window
             Web.CoreWebView2.Settings.IsStatusBarEnabled = false;
             Web.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
             Web.CoreWebView2.Settings.IsZoomControlEnabled = false;
-            Web.CoreWebView2Controller.DefaultBackgroundColor = Color.Transparent;
-
             Web.CoreWebView2.WebMessageReceived += OnWebMessage;
             Web.CoreWebView2.NewWindowRequested += OnNewWindowRequested;
 
