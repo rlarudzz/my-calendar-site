@@ -4,15 +4,16 @@
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         Title="KH Calendar Widget"
         Width="440" Height="680"
-        MinWidth="340" MinHeight="520"
+        MinWidth="320" MinHeight="420"
         MaxWidth="620" MaxHeight="900"
         WindowStyle="None"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
         ShowInTaskbar="False"
         ShowActivated="False"
         Topmost="False"
-        Background="#E8F0F2">
-    <Grid Background="#E8F0F2">
-        <wv2:WebView2 x:Name="Web" Margin="0" />
+        Background="Transparent">
+    <Grid Background="Transparent">
+        <wv2:WebView2CompositionControl x:Name="Web" Margin="0" />
     </Grid>
 </Window>
