@@ -33,8 +33,8 @@
   --text:#27505a; --muted:#6f959d; --accent-a:#58d5bf; --accent-b:#6caef0; --accent-c:#9e80ef;
 }
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;padding:0;overflow:hidden;font-family:Pretendard,system-ui,sans-serif;background:transparent;color:var(--text);font-size:calc(16px * var(--font-scale))}
-body{min-height:0;background:transparent}
+html,body{margin:0;width:100%;height:100%;padding:0;overflow:hidden;font-family:Pretendard,system-ui,sans-serif;background:transparent!important;color:var(--text);font-size:calc(16px * var(--font-scale))}
+body{min-height:0;background:transparent!important}
 button,input,select{font:inherit}
 .widget-shell{
   position:relative;width:100%;height:100%;margin:0;padding:14px;border-radius:28px;overflow:hidden;
@@ -176,3 +176,27 @@ button,input,select{font:inherit}
 /* EXACT WINDOW FIT */
 .widget-shell{box-shadow:none}
 .settings-panel{max-height:calc(100% - 20px)}
+
+
+/* CALENDAR ONLY MODE */
+.widget-shell.calendar-only{padding:8px;border-radius:26px}
+.calendar-only .hero-card,
+.calendar-only .wuwa-motion-panel,
+.calendar-only #schedulePanel,
+.calendar-only .widget-footer{display:none!important}
+.calendar-only .widget-header{
+  position:absolute;z-index:7;top:8px;right:8px;left:auto;margin:0;
+  background:transparent;pointer-events:none
+}
+.calendar-only .widget-header>div:first-child,
+.calendar-only #openFullBtn{display:none!important}
+.calendar-only .header-actions{pointer-events:auto}
+.calendar-only .calendar-card{
+  height:100%;margin:0;padding:42px 10px 10px;border-radius:22px;
+  background:rgb(255 255 255 / calc(var(--panel-alpha) * .92))
+}
+.calendar-only .calendar-head{margin-bottom:8px}
+.calendar-only .mini-calendar{gap:5px}
+.calendar-only .day{border-radius:12px}
+.calendar-only .settings-panel{z-index:12}
+.calendar-only .settings-backdrop{z-index:11}
