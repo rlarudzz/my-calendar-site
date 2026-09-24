@@ -114,3 +114,6 @@ button,input,select{font:inherit}
 .reset-btn{width:100%;background:#f0f2f7;color:#687b97}
 
 @media (max-width:480px){body{padding:8px}.widget-shell{padding:12px;border-radius:24px}.hero-card,.two-col{grid-template-columns:1fr}.header-actions{gap:5px}.open-btn{padding:9px}.settings-panel{width:calc(100% - 16px);top:8px;right:8px;bottom:8px}}
+/* Native WebView2 host integration */
+.widget-header{cursor:move}
+.widget-header button{cursor:pointer}
