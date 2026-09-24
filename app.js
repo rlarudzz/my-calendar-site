@@ -31,7 +31,12 @@
   const notes = (() => { try { return JSON.parse(localStorage.getItem(NOTE_KEY) || '{}'); } catch { return {}; } })();
   const theme = (() => { try { return JSON.parse(localStorage.getItem(THEME_KEY) || '{}'); } catch { return {}; } })();
 
+  const DEFAULT_WUWA_IMAGE = 'https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3513350/c85fc0782fba9d3c8c8b4989587c720c325ed9cf/header.jpg';
   const PRESETS = {
+    wuwa: {
+      bg: 'radial-gradient(circle at 8% 0%,#d6f5f3 0,transparent 28%), radial-gradient(circle at 92% 12%,#d9e7ef 0,transparent 24%), linear-gradient(135deg,#eef9f8 0%,#e5f1f3 48%,#eef2f7 100%)',
+      hero: 'linear-gradient(135deg,rgba(190,239,235,.86),rgba(190,220,229,.78) 55%,rgba(208,214,235,.72))'
+    },
     sky: {
       bg: 'radial-gradient(circle at 10% 0%,#d8e8ff 0,transparent 28%), radial-gradient(circle at 88% 12%,#efe0ff 0,transparent 24%), linear-gradient(135deg,#f7fbff 0%,#eaf2ff 48%,#eef4ff 100%)',
       hero: 'linear-gradient(135deg,rgba(153,211,255,.9),rgba(195,181,255,.85) 55%,rgba(255,205,231,.78))'
@@ -264,6 +269,7 @@
   });
 
   const PRESET_META = {
+    wuwa: {label:'Wuthering Waves', heroLine:'공명처럼 일정도 정확하게 맞추기', subline:'SOLARIS · RESONANCE · MISSION'},
     sky: {label:'Sky Breeze', heroLine:'일정 정리하고 하나씩 깨기', subline:'꾸미고 · 기록하고 · 챙기기'},
     midnight: {label:'Midnight Neon', heroLine:'야간 감성으로 일정 몰입하기', subline:'네온 · 게임 · 집중 모드'},
     rose: {label:'Rose Dream', heroLine:'부드럽게 정리하는 로즈 무드', subline:'핑크 · 퍼플 · 몽환 감성'},
@@ -291,10 +297,15 @@
   }
 
   function applyTheme() {
-    const presetName = theme.preset && PRESETS[theme.preset] ? theme.preset : 'sky';
+    if (!theme.wuwaSkinApplied) {
+      theme.preset = 'wuwa';
+      theme.wuwaSkinApplied = true;
+      saveTheme();
+    }
+    const presetName = theme.preset && PRESETS[theme.preset] ? theme.preset : 'wuwa';
     applyPreset(presetName);
-    document.body.style.setProperty('--custom-bg', theme.background ? `url("${theme.background}")` : 'none');
-    $('#profileVisual').style.setProperty('--profile-media', theme.profile ? `url("${theme.profile}")` : 'none');
+    document.body.style.setProperty('--custom-bg', theme.background ? `url("${theme.background}")` : `url("${DEFAULT_WUWA_IMAGE}")`);
+    $('#profileVisual').style.setProperty('--profile-media', theme.profile ? `url("${theme.profile}")` : `url("${DEFAULT_WUWA_IMAGE}")`);
     $('#profileMediaInput').value = theme.profile || '';
     $('#backgroundMediaInput').value = theme.background || '';
   }
@@ -362,8 +373,12 @@
     const now = new Date();
     $('#liveClock').textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
   }
-  setInterval(tickClock, 1000);
-  tickClock();
+  function scheduleClock() {
+    tickClock();
+    const delay = 60000 - (Date.now() % 60000) + 25;
+    setTimeout(scheduleClock, delay);
+  }
+  scheduleClock();
 
   $('#todayLabel').textContent = `${today.getMonth()+1}.${today.getDate()}`;
   renderCategories();
