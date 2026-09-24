@@ -1,0 +1,48 @@
+name: Build KH WebView2 Widget
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "desktop-widget/**"
+      - ".github/workflows/build-webview2-widget.yml"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore .\desktop-widget\KHCalendarWidget.csproj
+
+      - name: Publish self-contained Windows app
+        run: >
+          dotnet publish .\desktop-widget\KHCalendarWidget.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=false
+          -o .\release\app
+
+      - name: Copy installer files
+        shell: pwsh
+        run: |
+          Copy-Item .\desktop-widget\install.cmd .\release\install.cmd
+          Copy-Item .\desktop-widget\uninstall.cmd .\release\uninstall.cmd
+          Copy-Item .\desktop-widget\README-KO.txt .\release\README-KO.txt
+
+      - name: Upload installer package
+        uses: actions/upload-artifact@v4
+        with:
+          name: KH-Calendar-WebView2
+          path: .\release\
+          if-no-files-found: error
+          compression-level: 6
