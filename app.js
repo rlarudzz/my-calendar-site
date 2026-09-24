@@ -14,7 +14,18 @@
 
   let stored = null;
   try { stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch {}
-  let data = stored && Array.isArray(stored.events) ? stored : JSON.parse(JSON.stringify(fallback));
+  const baseData = JSON.parse(JSON.stringify(fallback));
+  let data = baseData;
+  if (stored && Array.isArray(stored.events)) {
+    const merged = new Map();
+    (baseData.events || []).forEach(e => merged.set(e.id, e));
+    stored.events.forEach(e => merged.set(e.id, e));
+    data = {
+      version: 1,
+      categories: Array.isArray(stored.categories) && stored.categories.length ? stored.categories : baseData.categories,
+      events: Array.from(merged.values())
+    };
+  }
   if (!Array.isArray(data.categories) || !data.categories.length) data.categories = fallback.categories;
 
   const notes = (() => { try { return JSON.parse(localStorage.getItem(NOTE_KEY) || '{}'); } catch { return {}; } })();
