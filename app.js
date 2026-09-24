@@ -6,7 +6,7 @@
   const fallback = window.DEFAULT_CALENDAR_DATA || { version: 1, categories: [], events: [] };
 
   const $ = (sel) => document.querySelector(sel);
-  const $ = (sel) => Array.from(document.querySelectorAll(sel));
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
   const pad = (n) => String(n).padStart(2, '0');
   const toYMD = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const parseYMD = (s) => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
