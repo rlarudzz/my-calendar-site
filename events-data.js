@@ -281,7 +281,7 @@ window.DEFAULT_CALENDAR_DATA = {
     {
       id: 'wuwa_2026_v37_phase1',
       date: '2026-09-30',
-      title: '[명조] 심월호 · 유노 · 치사 픽업',
+      title: '[명조] 여별 · 유노 · 치사 픽업',
       time: '',
       category: 'game',
       memo: '3.7 전반 픽업. 종료: 10/22'
