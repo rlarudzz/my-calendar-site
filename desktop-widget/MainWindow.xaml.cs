@@ -49,12 +49,15 @@ public partial class MainWindow : Window
         LoadWindowState();
         CreateTrayIcon();
 
+        Environment.SetEnvironmentVariable("WEBVIEW2_DEFAULT_BACKGROUND_COLOR", "00000000", EnvironmentVariableTarget.Process);
+
         try
         {
             var userData = Path.Combine(_stateDir, "WebView2");
             var env = await CoreWebView2Environment.CreateAsync(userDataFolder: userData);
             await Web.EnsureCoreWebView2Async(env);
 
+            Web.DefaultBackgroundColor = Color.Transparent;
             Web.CoreWebView2.Settings.AreDevToolsEnabled = false;
             Web.CoreWebView2.Settings.IsStatusBarEnabled = false;
             Web.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
@@ -105,10 +108,14 @@ public partial class MainWindow : Window
             if (type is "ready" or "widget-settings")
             {
                 if (root.TryGetProperty("opacity", out var opacityNode) && opacityNode.TryGetDouble(out var opacity))
-                    Opacity = Math.Clamp(opacity / 100.0, 0.55, 1.0);
+                    Opacity = Math.Clamp(opacity / 100.0, 0.20, 1.0);
+
+                var calendarOnly = root.TryGetProperty("calendarOnly", out var calendarOnlyNode) &&
+                                   calendarOnlyNode.ValueKind is JsonValueKind.True or JsonValueKind.False &&
+                                   calendarOnlyNode.GetBoolean();
 
                 if (root.TryGetProperty("size", out var sizeNode))
-                    ApplySizePreset(sizeNode.GetString());
+                    ApplySizePreset(sizeNode.GetString(), calendarOnly);
 
                 if (root.TryGetProperty("autoStart", out var autoNode) &&
                     (autoNode.ValueKind is JsonValueKind.True or JsonValueKind.False))
@@ -129,14 +136,21 @@ public partial class MainWindow : Window
         catch { }
     }
 
-    private void ApplySizePreset(string? size)
+    private void ApplySizePreset(string? size, bool calendarOnly = false)
     {
-        var target = size switch
-        {
-            "small" => (360d, 560d),
-            "large" => (520d, 800d),
-            _ => (440d, 680d)
-        };
+        var target = calendarOnly
+            ? size switch
+            {
+                "small" => (320d, 390d),
+                "large" => (500d, 610d),
+                _ => (400d, 490d)
+            }
+            : size switch
+            {
+                "small" => (360d, 560d),
+                "large" => (520d, 800d),
+                _ => (440d, 680d)
+            };
 
         if (Math.Abs(Width - target.Item1) > 2 || Math.Abs(Height - target.Item2) > 2)
         {
@@ -257,7 +271,7 @@ public partial class MainWindow : Window
                     Height = Math.Max(MinHeight, state.Height);
                     Left = state.Left;
                     Top = state.Top;
-                    Opacity = Math.Clamp(state.Opacity, 0.55, 1.0);
+                    Opacity = Math.Clamp(state.Opacity, 0.20, 1.0);
                     KeepInsideWorkArea();
                     _loadedState = true;
                     return;
