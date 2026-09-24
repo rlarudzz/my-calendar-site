@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./widget.css" />
 </head>
 <body>
-  <div class="widget-shell">
+  <div class="widget-shell" id="widgetShell">
     <div class="widget-glow glow-a"></div>
     <div class="widget-glow glow-b"></div>
 
@@ -19,7 +19,10 @@
         <div class="label">FLOATING CALENDAR</div>
         <h1>KH Mission Widget</h1>
       </div>
-      <button id="openFullBtn" class="open-btn">전체 캘린더</button>
+      <div class="header-actions">
+        <button id="settingsBtn" class="icon-action" aria-label="위젯 설정" title="위젯 설정">⚙</button>
+        <button id="openFullBtn" class="open-btn">전체 캘린더</button>
+      </div>
     </header>
 
     <section class="hero-card">
@@ -34,18 +37,18 @@
       </div>
     </section>
 
-    <section class="panel two-col">
-      <div class="card">
+    <section class="panel two-col" id="schedulePanel">
+      <div class="card" id="todayCard">
         <div class="card-title">오늘 일정</div>
         <div id="todayList" class="list"></div>
       </div>
-      <div class="card">
+      <div class="card" id="upcomingCard">
         <div class="card-title">다가오는 일정</div>
         <div id="upcomingList" class="list"></div>
       </div>
     </section>
 
-    <section class="panel calendar-card">
+    <section class="panel calendar-card" id="calendarCard">
       <div class="calendar-head">
         <div>
           <div class="mini-label">MINI MONTH</div>
@@ -66,6 +69,74 @@
       <div id="statsText">오늘 0개 · 남은 일정 0개</div>
       <a href="./index.html" target="_blank" rel="noopener">월간 보기 열기</a>
     </footer>
+
+    <aside id="settingsPanel" class="settings-panel" aria-hidden="true">
+      <div class="settings-head">
+        <div>
+          <div class="mini-label">WIDGET SETTINGS</div>
+          <h2>내 취향대로</h2>
+        </div>
+        <button id="closeSettingsBtn" class="icon-action" aria-label="설정 닫기">×</button>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-title">테마</div>
+        <div class="theme-grid">
+          <button class="theme-btn" data-theme="sky">Sky</button>
+          <button class="theme-btn" data-theme="midnight">Midnight</button>
+          <button class="theme-btn" data-theme="rose">Rose</button>
+          <button class="theme-btn" data-theme="mint">Mint</button>
+        </div>
+      </div>
+
+      <label class="setting-row">
+        <span>투명도 <b id="opacityValue">100%</b></span>
+        <input id="opacityRange" type="range" min="55" max="100" step="5" value="100" />
+      </label>
+
+      <label class="setting-row">
+        <span>글자 크기 <b id="fontValue">100%</b></span>
+        <input id="fontRange" type="range" min="85" max="120" step="5" value="100" />
+      </label>
+
+      <label class="setting-row">
+        <span>블러 강도 <b id="blurValue">18px</b></span>
+        <input id="blurRange" type="range" min="0" max="28" step="2" value="18" />
+      </label>
+
+      <div class="setting-group">
+        <div class="setting-title">창 크기</div>
+        <div class="size-grid">
+          <button class="size-btn" data-size="small">작게</button>
+          <button class="size-btn" data-size="medium">기본</button>
+          <button class="size-btn" data-size="large">크게</button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-title">표시할 내용</div>
+        <label class="toggle-row"><span>오늘 일정</span><input id="showTodayToggle" type="checkbox" checked><i></i></label>
+        <label class="toggle-row"><span>다가오는 일정</span><input id="showUpcomingToggle" type="checkbox" checked><i></i></label>
+        <label class="toggle-row"><span>미니 달력</span><input id="showCalendarToggle" type="checkbox" checked><i></i></label>
+      </div>
+
+      <label class="setting-select">
+        <span>일정 자동 반영</span>
+        <select id="refreshSelect">
+          <option value="5">5분마다</option>
+          <option value="10">10분마다</option>
+          <option value="30">30분마다</option>
+          <option value="0">자동 새로고침 끄기</option>
+        </select>
+      </label>
+
+      <div class="settings-note">
+        위젯 설정은 이 PC에 저장돼요. 일정 데이터는 GitHub 캘린더와 계속 연결됩니다.
+      </div>
+
+      <button id="resetSettingsBtn" class="reset-btn">설정 초기화</button>
+    </aside>
+    <div id="settingsBackdrop" class="settings-backdrop"></div>
   </div>
 
   <script src="./events-data.js"></script>
