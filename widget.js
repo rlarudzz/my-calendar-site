@@ -48,9 +48,9 @@
   const todayYMD = toYMD(today);
 
   const SIZE_MAP = {
-    small: {w:390,h:620},
-    medium: {w:470,h:760},
-    large: {w:560,h:880}
+    small: {w:360,h:560},
+    medium: {w:440,h:680},
+    large: {w:520,h:800}
   };
 
   function postHost(message) {
@@ -149,7 +149,7 @@
     const eventDates = new Set(data.events.map(e => e.date));
     const box = $('#miniCalendar');
     box.innerHTML = '';
-    for (let i = 0; i < 35; i++) {
+    for (let i = 0; i < 42; i++) {
       const d = new Date(start); d.setDate(start.getDate() + i);
       const ymd = toYMD(d);
       const el = document.createElement('div');
