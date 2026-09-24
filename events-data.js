@@ -253,6 +253,46 @@ window.DEFAULT_CALENDAR_DATA = {
       time: '',
       category: 'job',
       memo: ''
+    },
+    {
+      id: 'zzz_2026_v32_phase1',
+      date: '2026-09-09',
+      title: '[젠존제] 클라렛 · 남궁우 픽업',
+      time: '',
+      category: 'game',
+      memo: '3.2 전반 픽업. 종료: 9/30 11:59(서버 시간)'
+    },
+    {
+      id: 'zzz_2026_v32_phase2',
+      date: '2026-09-30',
+      title: '[젠존제] 록시 · 프로미아 픽업',
+      time: '12:00',
+      category: 'game',
+      memo: '3.2 후반 픽업 예정. 종료: 10/20'
+    },
+    {
+      id: 'wuwa_2026_v36_phase2',
+      date: '2026-09-10',
+      title: '[명조] 히유키 · 모니에 픽업',
+      time: '10:00',
+      category: 'game',
+      memo: '3.6 후반 픽업. 종료: 9/29 11:59(서버 시간)'
+    },
+    {
+      id: 'wuwa_2026_v37_phase1',
+      date: '2026-09-30',
+      title: '[명조] 심월호 · 유노 · 치사 픽업',
+      time: '',
+      category: 'game',
+      memo: '3.7 전반 픽업. 종료: 10/22'
+    },
+    {
+      id: 'wuwa_2026_v37_phase2',
+      date: '2026-10-22',
+      title: '[명조] 쇄명 · 린네 · 루실라 픽업',
+      time: '',
+      category: 'game',
+      memo: '3.7 후반 픽업. 종료: 11/11'
     }
   ]
 };
