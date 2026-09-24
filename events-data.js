@@ -11,5 +11,30 @@ window.DEFAULT_CALENDAR_DATA = {
     { id: 'important', name: '중요', color: '#ef6b75', bg: '#ffe0e4' },
     { id: 'etc', name: '기타', color: '#95a8bc', bg: '#e9eef4' }
   ],
-  events: []
+  events: [
+    {
+      id: 'posco_2026_apply_start',
+      date: '2026-09-01',
+      title: '포스코 지원서 접수 시작',
+      time: '',
+      category: 'job',
+      memo: '포스코 채용 지원서 접수 기간: 9/1(화) ~ 9/16(수)'
+    },
+    {
+      id: 'posco_2026_apply_deadline',
+      date: '2026-09-16',
+      title: '포스코 지원서 접수 마감',
+      time: '',
+      category: 'important',
+      memo: '포스코 채용 지원서 접수 마감일'
+    },
+    {
+      id: 'posco_2026_pat',
+      date: '2026-10-10',
+      title: '포스코 인적성 검사 (PAT)',
+      time: '',
+      category: 'exam',
+      memo: '온라인 진행. 이후 전형: 1차 면접(직무역량평가) → 2차 면접(가치적합성평가) → 최종 합격자 발표. 이후 일정은 이미지에 날짜 미표기.'
+    }
+  ]
 };
