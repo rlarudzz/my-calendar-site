@@ -13,6 +13,14 @@ window.DEFAULT_CALENDAR_DATA = {
   ],
   events: [
     {
+      id: 'personal_friends_visit_20261024',
+      date: '2026-10-24',
+      title: '친구들 놀러옴',
+      time: '',
+      category: 'personal',
+      memo: ''
+    },
+    {
       id: 'posco_2026_apply_start',
       date: '2026-09-01',
       title: '포스코 지원서 접수 시작',
