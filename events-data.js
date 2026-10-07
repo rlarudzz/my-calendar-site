@@ -263,17 +263,9 @@ window.DEFAULT_CALENDAR_DATA = {
       memo: ''
     },
     {
-      id: 'ewp_2026_interview_start',
-      date: '2026-10-19',
-      title: '동서발전 면접전형 시작',
-      time: '',
-      category: 'job',
-      memo: ''
-    },
-    {
-      id: 'ewp_2026_interview_end',
+      id: 'ewp_2026_interview',
       date: '2026-10-23',
-      title: '동서발전 면접전형 종료',
+      title: '동서발전 면접전형',
       time: '',
       category: 'job',
       memo: ''
