@@ -13,6 +13,22 @@ window.DEFAULT_CALENDAR_DATA = {
   ],
   events: [
     {
+      "id": "zzz_2026_v33_phase1",
+      "date": "2026-10-21",
+      "title": "[젠존제] 피닉스 · 벨리나 픽업",
+      "time": "",
+      "category": "game",
+      "memo": "3.3 전반 픽업. 업데이트 후 시작. 종료 예상: 2026-11-11 전반 종료 시점. 정확한 종료 일시 공식 공지 확인 필요. 출처: https://dotesports.com/zzz/guides/3-3-banners-phoenix-severian / https://www.u7buy.com/blog/zenless-zone-zero-3-3-banners/ (2026-10-11 확인)"
+    },
+    {
+      "id": "zzz_2026_v33_phase2",
+      "date": "2026-11-11",
+      "title": "[젠존제] 세베리안 · 노르마 픽업 (예정)",
+      "time": "",
+      "category": "game",
+      "memo": "3.3 후반 픽업. 시작 예상: 2026-11-11, 종료 예상: 2026-12-01. 전환일과 종료 일시는 공식 채널 공지 확인 필요. 출처: https://dotesports.com/zzz/guides/3-3-banners-phoenix-severian / https://timesaver.gg/blog/zzz-3-3-banners (2026-10-11 확인)"
+    },
+    {
       "id": "kwp_2026_apply_start",
       "date": "2026-09-30",
       "title": "서부발전 채용공고·입사지원 시작",
