@@ -18,15 +18,7 @@ window.DEFAULT_CALENDAR_DATA = {
       "title": "[젠존제] 피닉스 · 벨리나 픽업",
       "time": "",
       "category": "game",
-      "memo": "3.3 전반 픽업. 업데이트 후 시작. 종료 예상: 2026-11-11 전반 종료 시점. 정확한 종료 일시 공식 공지 확인 필요. 출처: https://dotesports.com/zzz/guides/3-3-banners-phoenix-severian / https://www.u7buy.com/blog/zenless-zone-zero-3-3-banners/ (2026-10-11 확인)"
-    },
-    {
-      "id": "zzz_2026_v33_phase2",
-      "date": "2026-11-11",
-      "title": "[젠존제] 세베리안 · 노르마 픽업 (예정)",
-      "time": "",
-      "category": "game",
-      "memo": "3.3 후반 픽업. 시작 예상: 2026-11-11, 종료 예상: 2026-12-01. 전환일과 종료 일시는 공식 채널 공지 확인 필요. 출처: https://dotesports.com/zzz/guides/3-3-banners-phoenix-severian / https://timesaver.gg/blog/zzz-3-3-banners (2026-10-11 확인)"
+      "memo": "3.3 전반 공식 확정 픽업. 2026-10-21 업데이트 완료 후 시작. 종료: 2026-11-11 12:59(KST). 공식 출처: https://zenless.hoyoverse.com/ko-kr/news/166926 / https://zenless.hoyoverse.com/ko-kr/news/166963 (2026-10-27 확인)"
     },
     {
       "id": "kwp_2026_apply_start",
@@ -368,3 +360,21 @@ window.DEFAULT_CALENDAR_DATA = {
     }
   ]
 };
+// 공식 확인 전 예상 일정은 기본 캘린더에서 제외합니다.
+// 기존 기본값과 동일한 저장 항목만 갱신하여 사용자 편집은 보존합니다.
+(() => {
+  const changes = [{"before":{"id":"zzz_2026_v33_phase1","date":"2026-10-21","title":"[젠존제] 피닉스 · 벨리나 픽업","time":"","category":"game","memo":"3.3 전반 픽업. 업데이트 후 시작. 종료 예상: 2026-11-11 전반 종료 시점. 정확한 종료 일시 공식 공지 확인 필요. 출처: https://dotesports.com/zzz/guides/3-3-banners-phoenix-severian / https://www.u7buy.com/blog/zenless-zone-zero-3-3-banners/ (2026-10-11 확인)"},"after":{"id":"zzz_2026_v33_phase1","date":"2026-10-21","title":"[젠존제] 피닉스 · 벨리나 픽업","time":"","category":"game","memo":"3.3 전반 공식 확정 픽업. 2026-10-21 업데이트 완료 후 시작. 종료: 2026-11-11 12:59(KST). 공식 출처: https://zenless.hoyoverse.com/ko-kr/news/166926 / https://zenless.hoyoverse.com/ko-kr/news/166963 (2026-10-27 확인)"}},{"before":{"id":"zzz_2026_v33_phase2","date":"2026-11-11","title":"[젠존제] 세베리안 · 노르마 픽업 (예정)","time":"","category":"game","memo":"3.3 후반 픽업. 시작 예상: 2026-11-11, 종료 예상: 2026-12-01. 전환일과 종료 일시는 공식 채널 공지 확인 필요. 출처: https://dotesports.com/zzz/guides/3-3-banners-phoenix-severian / https://timesaver.gg/blog/zzz-3-3-banners (2026-10-11 확인)"},"after":null}];
+  try {
+    const key = 'kh_calendar_data_v1';
+    const saved = JSON.parse(localStorage.getItem(key) || 'null');
+    if (!saved || !Array.isArray(saved.events)) return;
+    let changed = false;
+    saved.events = saved.events.flatMap(event => {
+      const change = changes.find(item => item.before.id === event.id);
+      if (!change || !Object.keys(change.before).every(field => event[field] === change.before[field])) return [event];
+      changed = true;
+      return change.after ? [{ ...event, ...change.after }] : [];
+    });
+    if (changed) localStorage.setItem(key, JSON.stringify(saved));
+  } catch {}
+})();
