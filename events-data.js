@@ -413,6 +413,22 @@ window.DEFAULT_CALENDAR_DATA = {
       "time": "12:59",
       "category": "game",
       "memo": "3.3 전반 픽업 종료(KST). 공식 공지: https://zenless.hoyoverse.com/ko-kr/news/166926 (2026-10-30 확인)"
+    },
+    {
+      "id": "zzz_2026_v33_phase2",
+      "date": "2026-11-11",
+      "title": "[젠존제] 세베리안 · 노르마 픽업",
+      "time": "13:00",
+      "category": "game",
+      "memo": "3.3 후반 공식 확정: 신규 세베리안·복각 노르마. 기간: 2026-11-11 13:00~2026-12-01 15:59(KST, 아시아 서버 UTC+8에서 +1시간 환산). 공식 영문 채널 공지 원문 확인: https://zenless.hoyoverse.com/m/en-us/news/167269 (2026-11-10 확인)."
+    },
+    {
+      "id": "zzz_2026_v33_phase2_end",
+      "date": "2026-12-01",
+      "title": "[젠존제] 세베리안 · 노르마 픽업 종료",
+      "time": "15:59",
+      "category": "game",
+      "memo": "아시아 서버 기준 KST. 공식 출처: https://zenless.hoyoverse.com/m/en-us/news/167269 (2026-11-10 확인)."
     }
   ]
 };
