@@ -429,6 +429,54 @@ window.DEFAULT_CALENDAR_DATA = {
       "time": "15:59",
       "category": "game",
       "memo": "아시아 서버 기준 KST. 공식 출처: https://zenless.hoyoverse.com/m/en-us/news/167269 (2026-11-10 확인)."
+    },
+    {
+      "id": "wuwa_2026_v38_phase1",
+      "date": "2026-11-12",
+      "title": "[명조] 릴리 · 시그리카 · 구원 픽업",
+      "time": "",
+      "category": "game",
+      "memo": "3.8 업데이트 완료 후 시작. 종료: 2026-12-03 10:59(KST). 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
+    },
+    {
+      "id": "wuwa_2026_v38_phase1_end",
+      "date": "2026-12-03",
+      "title": "[명조] 릴리 · 시그리카 · 구원 픽업 종료",
+      "time": "10:59",
+      "category": "game",
+      "memo": "3.8 전반 종료. 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
+    },
+    {
+      "id": "wuwa_2026_v38_phase2",
+      "date": "2026-12-03",
+      "title": "[명조] 양양·현령 · 수수 · 히유키 픽업",
+      "time": "11:00",
+      "category": "game",
+      "memo": "3.8 후반. 종료: 2026-12-21 12:59(KST). 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
+    },
+    {
+      "id": "wuwa_2026_v38_phase2_end",
+      "date": "2026-12-21",
+      "title": "[명조] 양양·현령 · 수수 · 히유키 픽업 종료",
+      "time": "12:59",
+      "category": "game",
+      "memo": "3.8 후반 종료. 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
+    },
+    {
+      "id": "wuwa_2026_v38_journey2",
+      "date": "2026-11-12",
+      "title": "[명조] 카멜리아 · 로코코 · 페비 · 브렌트 여정 튜닝",
+      "time": "",
+      "category": "game",
+      "memo": "여정이 남긴 울림 II. 3.8 업데이트 완료 후 시작. 종료: 2026-12-21 12:59(KST). 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
+    },
+    {
+      "id": "wuwa_2026_v38_journey2_end",
+      "date": "2026-12-21",
+      "title": "[명조] 여정이 남긴 울림 II 종료",
+      "time": "12:59",
+      "category": "game",
+      "memo": "대상: 카멜리아·로코코·페비·브렌트. 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
     }
   ]
 };
