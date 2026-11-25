@@ -477,6 +477,14 @@ window.DEFAULT_CALENDAR_DATA = {
       "time": "12:59",
       "category": "game",
       "memo": "대상: 카멜리아·로코코·페비·브렌트. 공식 한국어 업데이트 안내 첨부 P3 확인: https://game.naver.com/lounge/WutheringWaves/board/detail/8436623 (2026-11-10 확인). 시간은 Asia/Seoul(KST)."
+    },
+    {
+      "id": "zzz_2027_v34_kafka",
+      "date": "2027-01-01",
+      "title": "[젠존제] 카프카 콜라보 픽업",
+      "time": "",
+      "category": "game",
+      "memo": "공식 한국어 혜택 속보에서 2027년 1월 1일부터 기간 한정 변조에 추가됨을 확인. 시작 시각·종료 일시는 공식 확인 전이므로 기재하지 않음. 출처: https://zenless.hoyoverse.com/m/ko-kr/news/167400 (2026-11-25 확인)."
     }
   ]
 };
