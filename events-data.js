@@ -485,6 +485,14 @@ window.DEFAULT_CALENDAR_DATA = {
       "time": "",
       "category": "game",
       "memo": "공식 한국어 혜택 속보에서 2027년 1월 1일부터 기간 한정 변조에 추가됨을 확인. 시작 시각·종료 일시는 공식 확인 전이므로 기재하지 않음. 출처: https://zenless.hoyoverse.com/m/ko-kr/news/167400 (2026-11-25 확인)."
+    },
+    {
+      "id": "zzz_2026_v34_phase1",
+      "date": "2026-12-02",
+      "title": "[젠존제] 태양을 가져온 자 · 로빈 픽업",
+      "time": "",
+      "category": "game",
+      "memo": "3.4 업데이트 완료 후 시작. 호요버스 공식 보도자료에서 두 에이전트의 변조가 업데이트 첫날 시작됨을 확인. 정확한 시작 시각·종료 일시는 기재하지 않음. 공식 한국어 버전 출시일: https://zenless.hoyoverse.com/m/ko-kr/news/167400 / 호요버스 배포 보도자료: https://www.gamespress.com/tr/Zenless-Zone-Zero-Version-34-The-Finality-of-the-Day-Launches-December (2026-11-26 확인). 시간 기준: Asia/Seoul(KST)."
     }
   ]
 };
